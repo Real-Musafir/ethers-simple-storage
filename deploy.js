@@ -3,11 +3,11 @@ const fs = require("fs-extra");
 
 async function main() {
   const provider = new ethers.providers.JsonRpcProvider(
-    "HTTP://127.0.0.1:7545" //this is ganash network
+    "HTTP://127.0.0.1:7545"
   );
 
   const wallet = new ethers.Wallet(
-    "d5d9d772b766477bd91ac6662a905f9a1cc1a1d1e8297d7ea44b52437d1ea968",
+    "2d576b2964032b3b57ee976b4481702439eec401e34643e04eba40c7e5c65414",
     provider
   );
 
@@ -21,7 +21,11 @@ async function main() {
 
   console.log("Deploying, please wait....");
   const contract = await contractFactory.deploy();
-  console.log(contract);
+
+  // await contract.deployTransaction.wait(1);
+
+  const currentFavouriteNumber = await contract.retrieve();
+  console.log(currentFavouriteNumber);
 }
 
 main();
